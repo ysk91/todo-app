@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
       now = Time.now
       @category.update_column(:done_date, now)
     end
-    redirect_to categories_url, notice: "カテゴリー「#{@category.title}」を削除しました。"
+    redirect_to categories_url, notice: "カテゴリー「#{@category.title}」を完了しました。"
   end
 
 
