@@ -1,9 +1,6 @@
 class TodosController < ApplicationController
-  # def create
-  #   @todo = Category.todos.build(todo_params)
-  # end
-
   def destroy
+    @todo = Todo.find(params[:id])
     ActiveRecord::Base.transaction do
       now = Time.now
       @todo.update_column(:done_date, now)
