@@ -1,2 +1,49 @@
 <h1>Categoies_index</h1>
 
+<div class="container">
+  <div class="row gx-2">
+    <div class="col-3 border p-3">
+      <p class="lead">投稿エリア</p>
+
+      <%= form_with model: @category do |f| %>
+        <div class="category-post-area">
+          <%= f.label :title, class: 'form-label' %>
+          <%= f.text_field :title %>
+        </div>
+        <div class="todos-post-area">
+          <%= f.fields_for :todos do |todo| %>
+            <%= f.label :content, class: 'form-label' %>
+            <%= f.text_field :content %>
+          <% end %>
+        </div>
+        <%= f.submit '投稿' %>
+      <% end %>
+    </div>
+
+    <div class="col-6 border p-3">
+      <p class="lead">indexエリア</p>
+      <%# N+1問題に注意 %>
+      <% @categories.each do |category| %>
+        <div class="todo-list-area border p-2 my-2">
+          <div class="category-title-area fw-bold">
+            <%= category.title %>
+          </div>
+          <div class="todos-content-area">
+            <% category.todos.each do |todo| %>
+              <%= todo.content %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-3 border p-3">
+      <p class="lead">ユーザーエリア(demo)</p>
+      <div>
+      ・ユーザー名: sample<br>
+      ・残カテゴリ数: <%= "#{Category.active.count}" %><br>
+      ・達成カテゴリ数: <%= "#{Category.done.count} / #{Category.all.count}" %><br>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,21 @@
 class CategoriesController < ApplicationController
   def index
+    @categories = Category.active.order(id: :DESC)
     @category = Category.new
-    @categories = Category.active
+    @todo = @category.todos.build
   end
 
   def create
-    @category = Category.create(category_params)
+    @category = Category.new(category_params)
+    if @category.save
+      # @todos = []
+
+      # CreateTodoListJob.perform_now(@todos)
+      redirect_to categories_path
+    else
+      render 'categories'
+    end
+
   end
 
   def destroy
@@ -19,6 +29,6 @@ class CategoriesController < ApplicationController
 
   private
     def category_params
-      params.require(:category).permit(:title)
+      params.require(:category).permit(:title, todos_attributes: [:id, :content])
     end
 end

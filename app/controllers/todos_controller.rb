@@ -1,7 +1,7 @@
 class TodosController < ApplicationController
-  def create
-    @todo = Category.todos.build(todo_params)
-  end
+  # def create
+  #   @todo = Category.todos.build(todo_params)
+  # end
 
   def destroy
     ActiveRecord::Base.transaction do
