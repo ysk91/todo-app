@@ -7,7 +7,7 @@
 
       <%= form_with model: @category do |f| %>
         <div class="category-post-area mb-3">
-          <%= f.label :title, class: 'form-label fw-bold' %><br>
+          <%= f.label 'カテゴリ', class: 'form-label fw-bold' %><br>
           <%= f.text_field :title %>
         </div>
         <div class="todos-post-area mb-3">
@@ -16,29 +16,24 @@
             <%= t.text_field :content, class: "my-1" %>
           <% end %>
         </div>
-        <%= f.submit '投稿' %>
+        <%= f.submit '投稿', class: "btn btn-primary" %>
       <% end %>
     </div>
 
     <div class="col-6 border p-3">
       <p class="lead">indexエリア</p>
-      <%# N+1問題に注意 %>
       <% @categories.each do |category| %>
         <div class="todo-list-area border p-2 my-2">
           <div class="category-title-area d-flex justify-content-between">
             <p class="fw-bold"><%= category.title %></p>
-            <button type="button" class="btn btn-outline-danger">
-              <%= link_to '完了', category_path(category.id), method: :delete,
-              data: { confirm: "ToDo「#{category.title}」を完了します。よろしいですか？" } %>
-            </button>
+            <%= link_to '完了', category_path(category.id), method: :delete, class: "btn btn-outline-danger",
+            data: { confirm: "ToDo「#{category.title}」を完了します。よろしいですか？" } %>
           </div>
           <% category.todos.active.each do |todo| %>
             <div class="todo-show-area d-flex justify-content-between py-1">
               <p><%= todo.content %></p>
-              <button type="button" class="btn btn-outline-danger">
-                <%= link_to '完了', category_todo_path(todo.category.id, todo.id), method: :delete,
-                data: { confirm: "ToDo「#{category.title}」を完了します。よろしいですか？" } %>
-              </button>
+              <%= link_to '完了', category_todo_path(todo.category.id, todo.id), method: :delete, class: "btn btn-outline-danger",
+              data: { confirm: "ToDo「#{category.title}」を完了します。よろしいですか？" } %>
             </div>
           <% end %>
           <div class="new-todo-area">
