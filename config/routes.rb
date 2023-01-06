@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get root to: 'home#top'
   resources :categories, only: [:index, :create, :destroy] do
-    resources :todos, only: :destroy
+    resources :todos, only: [:create, :destroy]
   end
 end
