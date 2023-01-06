@@ -13,9 +13,7 @@
         <div class="todos-post-area mb-3">
           <%= f.fields_for :todos do |t| %>
             <%= t.label :content, class: 'form-label fw-bold' %><br>
-            <% 5.times do %>
-              <%= t.text_field :content %>
-            <% end %>
+            <%= t.text_field :content %>
           <% end %>
         </div>
         <%= f.submit '投稿' %>
@@ -27,24 +25,22 @@
       <%# N+1問題に注意 %>
       <% @categories.each do |category| %>
         <div class="todo-list-area border p-2 my-2">
-          <div class="category-title-area fw-bold">
-            <%= category.title %>
-            <button type="button" class="btn btn-outline-danger pull-right">
+          <div class="category-title-area d-flex justify-content-between">
+            <p class="fw-bold"><%= category.title %></p>
+            <button type="button" class="btn btn-outline-danger">
               <%= link_to '完了', category_path(category.id), method: :delete,
               data: { confirm: "ToDo「#{category.title}」を完了します。よろしいですか？" } %>
             </button>
           </div>
-          <div class="todos-content-area">
-            <% category.todos.active.each do |todo| %>
-              <div class="todo-show-area">
-                <%= todo.content %>
-                <button type="button" class="btn btn-outline-danger text-right">
-                  <%= link_to '完了', category_todo_path(todo.category.id, todo.id), method: :delete,
-                  data: { confirm: "ToDo「#{category.title}」を完了します。よろしいですか？" } %>
-                </button>
-              </div>
-            <% end %>
-          </div>
+          <% category.todos.active.each do |todo| %>
+            <div class="todo-show-area d-flex justify-content-between py-1">
+              <p><%= todo.content %></p>
+              <button type="button" class="btn btn-outline-danger">
+                <%= link_to '完了', category_todo_path(todo.category.id, todo.id), method: :delete,
+                data: { confirm: "ToDo「#{category.title}」を完了します。よろしいですか？" } %>
+              </button>
+            </div>
+          <% end %>
           <div class="new-todo-area">
             <%= form_with model: [category, @todo] do |f| %>
               <%= f.text_field :content %>
