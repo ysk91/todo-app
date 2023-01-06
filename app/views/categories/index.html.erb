@@ -36,11 +36,19 @@
           </div>
           <div class="todos-content-area">
             <% category.todos.active.each do |todo| %>
-              <%= todo.content %>
-              <button type="button" class="btn btn-outline-danger text-right">
-                <%= link_to '完了', category_todo_path(todo.category.id, todo.id), method: :delete,
-                data: { confirm: "ToDo「#{category.title}」を完了します。よろしいですか？" } %>
-              </button>
+              <div class="todo-show-area">
+                <%= todo.content %>
+                <button type="button" class="btn btn-outline-danger text-right">
+                  <%= link_to '完了', category_todo_path(todo.category.id, todo.id), method: :delete,
+                  data: { confirm: "ToDo「#{category.title}」を完了します。よろしいですか？" } %>
+                </button>
+              </div>
+            <% end %>
+          </div>
+          <div class="new-todo-area">
+            <%= form_with model: [category, @todo] do |f| %>
+              <%= f.text_field :content %>
+              <%= f.submit '追加' %>
             <% end %>
           </div>
         </div>
