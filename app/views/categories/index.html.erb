@@ -29,7 +29,7 @@
         <div class="todo-list-area border p-2 my-2">
           <div class="category-title-area fw-bold">
             <%= category.title %>
-            <button type="button" class="btn btn-outline-danger">
+            <button type="button" class="btn btn-outline-danger pull-right">
               <%= link_to '完了', category_path(category.id), method: :delete,
               data: { confirm: "ToDo「#{category.title}」を完了します。よろしいですか？" } %>
             </button>
@@ -37,7 +37,7 @@
           <div class="todos-content-area">
             <% category.todos.active.each do |todo| %>
               <%= todo.content %>
-              <button type="button" class="btn btn-outline-danger">
+              <button type="button" class="btn btn-outline-danger text-right">
                 <%= link_to '完了', category_todo_path(todo.category.id, todo.id), method: :delete,
                 data: { confirm: "ToDo「#{category.title}」を完了します。よろしいですか？" } %>
               </button>
