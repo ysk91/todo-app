@@ -2,7 +2,9 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.active.order(id: :DESC)
     @category = Category.new
-    @todo = @category.todos.build
+    # ToDoの新規作成と追加作成を分けて定義する
+    5.times { @category.todos.build }
+    @add_todo = @category.todos.build
   end
 
   def create

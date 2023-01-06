@@ -11,9 +11,9 @@
           <%= f.text_field :title %>
         </div>
         <div class="todos-post-area mb-3">
+          <p class="fw-bold">ToDo</p>
           <%= f.fields_for :todos do |t| %>
-            <%= t.label :content, class: 'form-label fw-bold' %><br>
-            <%= t.text_field :content %>
+            <%= t.text_field :content, class: "my-1" %>
           <% end %>
         </div>
         <%= f.submit '投稿' %>
@@ -42,7 +42,7 @@
             </div>
           <% end %>
           <div class="new-todo-area">
-            <%= form_with model: [category, @todo] do |f| %>
+            <%= form_with model: [category, @add_todo] do |f| %>
               <%= f.text_field :content %>
               <%= f.submit '追加' %>
             <% end %>
