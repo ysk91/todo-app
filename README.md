@@ -1,24 +1,20 @@
-# README
+## 動作環境
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
++ 検証環境として docker環境を用意しています。
++ レポジトリをcloneした後は、docker環境にて起動させてください。
++ 下記コマンドを実行すると3000番ポートでRailsサーバーが起動します。
+```
+$ docker-compose build
+$ docker-compose up -d
+```
 
-Things you may want to cover:
+### セットアップ情報
+コンテナに入った後、yarnインストールを行ってください。
+```
+$ docker-compose exec web bash
+```
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+yarnインストール
+```
+yarn install
+```
