@@ -1,0 +1,13 @@
+<%= form_with model: @category do |f| %>
+  <div class="category-post-area mb-3">
+    <%= f.label 'カテゴリ', class: 'form-label fw-bold' %>
+    <li><%= f.text_field :title %></li>
+  </div>
+  <div class="todos-post-area mb-3">
+    <p class="fw-bold">ToDo</p>
+    <%= f.fields_for :todos do |t| %>
+      <li><%= t.text_field :content, class: "my-1" %></li>
+    <% end %>
+  </div>
+  <%= f.submit '投稿', class: "btn btn-primary" %>
+<% end %>

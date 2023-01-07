@@ -14,7 +14,11 @@ class CategoriesController < ApplicationController
     else
       render 'categories'
     end
+  end
 
+  def edit
+    @category = Category.find(params[:id])
+    @todos = @category.todos
   end
 
   def destroy
