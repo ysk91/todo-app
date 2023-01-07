@@ -21,6 +21,15 @@ class CategoriesController < ApplicationController
     @todos = @category.todos
   end
 
+  def update
+    @category = Category.find(params[:id])
+    if @category.update(category_params)
+      redirect_to categories_path
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
     @category = Category.find(params[:id])
     ActiveRecord::Base.transaction do
