@@ -1,7 +1,13 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Categoryを50個作成
+categories_array = 50.times.map {|n| {
+  title: "#{Faker::Lorem.sentence(word_count: 2)}-#{n+1}"
+} }
+Category.create!(categories_array)
+
+# 各Categoryに5個ずつToDoをもたせる
+Category.all.each do |cat|
+  contents_array = 5.times.map {{
+    content: Faker::Lorem.sentence(word_count: 5)
+  }}
+  cat.todos.create!(contents_array)
+end
