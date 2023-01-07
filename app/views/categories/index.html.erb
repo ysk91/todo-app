@@ -9,6 +9,7 @@
 
     <div class="col-6 border p-3">
       <p class="lead">indexエリア</p>
+      <%= paginate @categories, theme: 'bootstrap-5' %>
       <% @categories.each do |category| %>
         <div class="todo-list-area border p-2 my-2">
           <div class="category-title-area d-flex justify-content-between">
