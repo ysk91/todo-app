@@ -24,4 +24,10 @@ RSpec.describe 'Todoモデルのテスト' do
       end
     end
   end
+
+  describe 'statusのテスト' do
+    it 'デフォルトがwaitingであること' do
+      expect(todo.status == 'waiting').to eq true
+    end
+  end
 end

@@ -14,16 +14,17 @@ ActiveRecord::Schema.define(version: 2023_01_04_223427) do
 
   create_table "categories", charset: "utf8mb4", force: :cascade do |t|
     t.string "title", null: false
-    t.datetime "done_date"
+    t.date "done_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "todos", charset: "utf8mb4", force: :cascade do |t|
-    t.string "content", null: false
-    t.datetime "deadtime"
-    t.datetime "done_date"
     t.bigint "category_id"
+    t.string "content", null: false
+    t.string "status", default: "waiting", null: false
+    t.date "deadtime"
+    t.date "done_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_todos_on_category_id"
