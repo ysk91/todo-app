@@ -1,12 +1,20 @@
 <%= form_with model: @category do |f| %>
   <div class="category-post-area mb-3">
     <%= f.label 'カテゴリ', class: 'form-label fw-bold' %>
-    <li><%= f.text_field :title %></li>
+    <li><%= f.text_field :title, class: 'container-fluid' %></li>
   </div>
   <div class="todos-post-area mb-3">
     <p class="fw-bold">ToDo</p>
     <%= f.fields_for :todos do |t| %>
-      <li><%= t.text_field :content, class: "my-1" %></li>
+      <div class="row my-2">
+        <div class="col-10">
+          <%= t.text_field :content, class: 'container-fluid' %>
+        </div>
+        <div class="col-2">
+          <%= t.select :status_text, Todo.status.options %>
+        </div>
+      </div>
+
     <% end %>
   </div>
   <%= f.submit '投稿', class: "btn btn-primary" %>
