@@ -1,4 +1,7 @@
 class Todo < ApplicationRecord
+  extend Enumerize
+  enumerize :status, in: %i(waiting working done)
+
   belongs_to :category
 
   validates :content, {presence: true, length: {maximum: 100} }
