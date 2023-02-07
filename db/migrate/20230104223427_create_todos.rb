@@ -1,5 +1,5 @@
 class CreateTodos < ActiveRecord::Migration[6.1]
-  def change
+  def up
     create_table :todos do |t|
       t.string     :content,   null: false
       t.datetime   :deadtime,  null: true
