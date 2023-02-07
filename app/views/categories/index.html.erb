@@ -17,13 +17,26 @@
             <%= link_to '完了', category_path(category.id), method: :delete, class: "btn btn-outline-danger",
             data: { confirm: "ToDo「#{category.title}」を完了します。よろしいですか？" } %>
           </div>
-          <% category.todos.active.each do |todo| %>
-            <div class="todo-show-area d-flex justify-content-between py-1">
-              <p><%= todo.content %></p>
-              <%= link_to '完了', category_todo_path(todo.category.id, todo.id), method: :delete, class: "btn btn-outline-danger",
-              data: { confirm: "ToDo「#{category.title}」を完了します。よろしいですか？" } %>
-            </div>
-          <% end %>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ToDo</th>
+                  <th scope="col">ステータス</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% category.todos.active.each do |todo| %>
+                  <tr>
+                    <td><%= todo.content %></td>
+                    <td><%= todo.status_text %></td>
+                    <td><%= link_to '完了', category_todo_path(todo.category.id, todo.id), method: :delete, class: "btn btn-outline-danger",
+                        data: { confirm: "ToDo「#{category.title}」を完了します。よろしいですか？" } %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
           <div class="new-todo-area">
             <%= form_with model: [category, @add_todo] do |f| %>
               <%= f.text_field :content %>
