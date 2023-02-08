@@ -4,14 +4,14 @@
     <li><%= f.text_field :title, class: 'container-fluid' %></li>
   </div>
   <div class="todos-post-area mb-3">
-    <p class="fw-bold">ToDo</p>
+    <%= f.label 'ToDo', class: 'form-label fw-bold' %>
     <%= f.fields_for :todos do |t| %>
       <div class="row my-2">
-        <div class="col-10">
+        <div class="col-8">
           <%= t.text_field :content, class: 'container-fluid' %>
         </div>
-        <div class="col-2">
-          <%= t.select :status_text, Todo.status.options %>
+        <div class="col-4">
+          <%= t.select :status, @statuses, selected: '' %>
         </div>
       </div>
 
