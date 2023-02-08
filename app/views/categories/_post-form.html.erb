@@ -11,7 +11,12 @@
           <%= t.text_field :content, class: 'container-fluid' %>
         </div>
         <div class="col-4">
-          <%= t.select :status, @statuses, selected: '' %>
+          <% case controller.action_name %>
+          <% when 'index' %>
+            <%= t.select :status, @statuses, selected: '' %>
+          <% when 'edit' %>
+            <%= t.select :status, @statuses %>
+          <% end %>
         </div>
       </div>
 
