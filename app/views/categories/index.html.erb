@@ -1,13 +1,21 @@
 <h1>Categories_index</h1>
 
 <div class="container">
+  <div class="border my-3 p-2">
+    <p class="lead">ユーザーエリア(demo)</p>
+    <div>
+      ・ユーザー名: sample<br>
+      ・残カテゴリ数: <%= "#{Category.active.count}" %><br>
+      ・達成カテゴリ数: <%= "#{Category.all.count - Category.active.count} / #{Category.all.count}" %><br>
+    </div>
+  </div>
   <div class="row gx-2">
-    <div class="col-3 border p-3">
+    <div class="col-5 border p-3">
       <p class="lead">投稿エリア</p>
       <%= render 'post-form' %>
     </div>
 
-    <div class="col-6 border p-3">
+    <div class="col-7 border p-3">
       <p class="lead">indexエリア</p>
       <%= paginate @categories, theme: 'bootstrap-5' %>
       <% @categories.each do |category| %>
@@ -15,19 +23,40 @@
           <div class="category-title-area d-flex justify-content-between">
             <p class="fw-bold"><%= category.title %></p>
             <%= link_to '完了', category_path(category.id), method: :delete, class: "btn btn-outline-danger",
-            data: { confirm: "ToDo「#{category.title}」を完了します。よろしいですか？" } %>
+                data: { confirm: "カテゴリ「#{category.title}」を完了します。よろしいですか？" } %>
           </div>
-          <% category.todos.active.each do |todo| %>
-            <div class="todo-show-area d-flex justify-content-between py-1">
-              <p><%= todo.content %></p>
-              <%= link_to '完了', category_todo_path(todo.category.id, todo.id), method: :delete, class: "btn btn-outline-danger",
-              data: { confirm: "ToDo「#{category.title}」を完了します。よろしいですか？" } %>
-            </div>
-          <% end %>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ToDo</th>
+                <th scope="col">ステータス</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% category.todos.active.each do |todo| %>
+                <tr>
+                  <td><%= todo.content %></td>
+                  <td><%= todo.status_text %></td>
+                  <td><%= link_to '完了', category_todo_path(todo.category.id, todo.id), method: :delete, class: "btn btn-outline-danger",
+                      data: { confirm: "ToDo「#{todo.content}」を完了します。よろしいですか？" } %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
           <div class="new-todo-area">
             <%= form_with model: [category, @add_todo] do |f| %>
-              <%= f.text_field :content %>
-              <%= f.submit '追加' %>
+              <div class="row my-2">
+                <div class="col-7">
+                  <%= f.text_field :content, class: 'container-fluid' %>
+                </div>
+                <div class="col-3">
+                  <%= f.select :status, @statuses, selected: '' %>
+                </div>
+                <div class="col-2">
+                  <%= f.submit '追加', class: "btn btn-outline-primary mt-2" %>
+                </div>
+              </div>
             <% end %>
           </div>
           <div class="edit-category-area">
@@ -35,15 +64,6 @@
           </div>
         </div>
       <% end %>
-    </div>
-
-    <div class="col-3 border p-3">
-      <p class="lead">ユーザーエリア(demo)</p>
-      <div>
-      ・ユーザー名: sample<br>
-      ・残カテゴリ数: <%= "#{Category.active.count}" %><br>
-      ・達成カテゴリ数: <%= "#{Category.all.count - Category.active.count} / #{Category.all.count}" %><br>
-      </div>
     </div>
   </div>
 </div>

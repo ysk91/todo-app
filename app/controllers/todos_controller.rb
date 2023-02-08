@@ -1,12 +1,8 @@
 class TodosController < ApplicationController
   def create
     @category = Category.find(params[:category_id])
-    @todo = @category.todos.build(todo_params)
-    if @todo.save
-      redirect_to categories_path
-    else
-      render 'categories'
-    end
+    @todo = @category.todos.create(todo_params)
+    redirect_to categories_path
   end
 
   def destroy
@@ -21,6 +17,6 @@ class TodosController < ApplicationController
   private
 
   def todo_params
-    params.require(:todo).permit(:content, :category_id)
+    params.require(:todo).permit(:category_id, :content, :status)
   end
 end

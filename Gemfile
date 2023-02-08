@@ -30,10 +30,13 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # ページネーションの導入
 gem 'kaminari'
 gem 'bootstrap5-kaminari-views'
+# enumの導入
+gem 'enumerize'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry-rails'
   gem 'faker'
 end
 

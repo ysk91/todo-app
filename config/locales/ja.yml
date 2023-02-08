@@ -3,6 +3,7 @@ ja:
     formats:
       default: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
+
   activerecord:
     errors:
       messages:
@@ -20,6 +21,7 @@ ja:
           attributes:
             profile:
               too_short: を入力してください
+
     models:
       category: カテゴリ
       todo: ToDo
@@ -28,4 +30,12 @@ ja:
         title: カテゴリ
       todo:
         content: ToDo
+        status: ステータス
         deadtime: 締め切り日
+
+  enumerize:
+    todo:
+      status:
+        waiting: 未着手
+        working: 仕掛中
+        done: 完了

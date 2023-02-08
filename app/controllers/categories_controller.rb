@@ -5,20 +5,18 @@ class CategoriesController < ApplicationController
     # ToDoの新規作成と追加作成を分けて定義する
     5.times { @category.todos.build }
     @add_todo = @category.todos.build
+    select_statuses
   end
 
   def create
-    @category = Category.new(category_params)
-    if @category.save
-      redirect_to categories_path
-    else
-      render 'categories'
-    end
+    @category = Category.create(category_params)
+    redirect_to categories_path
   end
 
   def edit
     @category = Category.find(params[:id])
     @todos = @category.todos
+    select_statuses
   end
 
   def update
@@ -42,6 +40,10 @@ class CategoriesController < ApplicationController
 
   private
     def category_params
-      params.require(:category).permit(:title, todos_attributes: [:id, :content, :_destroy])
+      params.require(:category).permit(:title, todos_attributes: [:id, :content, :status, :_destroy])
+    end
+
+    def select_statuses
+      @statuses = Todo.status.options << ['選択してください', '']
     end
 end
