@@ -5,8 +5,8 @@
     <p class="lead">ユーザーエリア(demo)</p>
     <div>
       ・ユーザー名: sample<br>
-      ・残カテゴリ数: <%= "#{Category.active.count}" %><br>
-      ・達成カテゴリ数: <%= "#{Category.all.count - Category.active.count} / #{Category.all.count}" %><br>
+      ・残カテゴリ数: <%= @active_category_count %><br>
+      ・達成カテゴリ数: <%= "#{@all_category_count - @active_category_count} / #{@all_category_count}" %><br>
     </div>
   </div>
   <div class="row gx-2">

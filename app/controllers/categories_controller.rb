@@ -6,6 +6,9 @@ class CategoriesController < ApplicationController
     5.times { @category.todos.build }
     @add_todo = @category.todos.build
     select_statuses
+
+    @all_category_count = Category.all.count
+    @active_category_count = Category.active.count
   end
 
   def create
@@ -40,7 +43,7 @@ class CategoriesController < ApplicationController
 
   private
     def category_params
-      params.require(:category).permit(:title, todos_attributes: [:id, :content, :status, :_destroy])
+      params.require(:category).permit(:title, todos_attributes: [:id, :category_id, :content, :status, :_destroy])
     end
 
     def select_statuses

@@ -20,15 +20,13 @@ ActiveRecord::Schema.define(version: 2023_01_04_223427) do
   end
 
   create_table "todos", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "category_id"
+    t.integer "category_id", null: false
     t.string "content", null: false
     t.string "status", default: "waiting", null: false
     t.date "deadtime"
     t.date "done_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_todos_on_category_id"
   end
 
-  add_foreign_key "todos", "categories"
 end
