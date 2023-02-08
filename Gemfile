@@ -32,6 +32,8 @@ gem 'kaminari'
 gem 'bootstrap5-kaminari-views'
 # enumの導入
 gem 'enumerize'
+# Deviseの導入
+gem 'devise'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
