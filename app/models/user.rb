@@ -14,7 +14,7 @@ class User < ApplicationRecord
                                   uniqueness: true
                                   # format: false
 
-  # validates :password,            presence: true
+  #validates :password,            presence: true
                                   # length: { maximum: 50 }
                                   # uniqueness: { scope: :group_id }
                                   # format: false

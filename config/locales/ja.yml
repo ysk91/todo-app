@@ -29,6 +29,10 @@ ja:
           attributes:
             profile:
               too_short: を入力してください
+        user:
+          attributes:
+            email:
+              invalid: の形式が異なっています
     models:
       user: ユーザー
       category: カテゴリ
