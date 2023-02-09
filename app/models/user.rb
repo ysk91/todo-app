@@ -3,4 +3,21 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable, :recoverable, and :omniauthable
   devise :database_authenticatable, :registerable,
           :rememberable, :validatable
+
+  validates :name,                presence: true,
+                                  length: { maximum: 50 }
+                                  # uniqueness: { scope: :group_id }
+                                  # format: false
+
+  validates :email,               # presence: true,
+                                  # length: { maximum: 50 }
+                                  uniqueness: true
+                                  # format: false
+
+  # validates :password,            presence: true
+                                  # length: { maximum: 50 }
+                                  # uniqueness: { scope: :group_id }
+                                  # format: false
+
+
 end
