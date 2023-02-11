@@ -5,18 +5,16 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations:  'users/registrations',
     sessions:       'users/sessions'
-  }
-  devise_scope :users do
-    get       'users/sign_up', to:      'users/registrations#new'
-    get       'users/edit', to:         'users/registrations#edit'
-    patch     'users', to:              'users/registrations#update'
-    put       'users', to:              'users/registrations#update'
-    delete    'users', to:              'users/registrations#destroy'
-    post      'users', to:              'users/registrations#create'
+  }, skip: [:registrations, :sessions]
+  devise_scope :user do
+    get       'sign_up', to:            'users/registrations#new',      as: :new_user
+    post      'users', to:              'users/registrations#create',   as: :create_user
+    get       'users/:id/edit', to:     'users/registrations#edit',     as: :edit_user
+    patch     'users', to:              'users/registrations#update',   as: :update_user
 
-    get       'users/sign_in', to:      'users/sessions#new'
-    post      'users/sign_in', to:      'users/sessions#create'
-    delete    'users/sign_out', to:     'users/sessions#destroy'
+    get       'login', to:              'users/sessions#new',           as: :login
+    post      'login', to:              'users/sessions#create',        as: :create_session
+    delete    'logout', to:             'users/sessions#destroy',       as: :logout
   end
 
   resources :categories, only: [:index, :create, :edit, :update, :destroy] do
