@@ -1,15 +1,19 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
 
   def new
-    super
+    @user = User.new
   end
 
   def create
-    super
+    @user = User.new(users_params)
+    if @user.save
+      sign_in(:user, @user)
+      redirect_to categories_path, notice: "新規ユーザー「#{@user.name}」を登録しました。"
+    else
+      render 'new'
+    end
   end
 
   def edit
@@ -22,23 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-  # end
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:name])
-  # end
-
-  # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
-
-  # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def users_params
+    params.require(:user).permit(:name, :email, :password)
+  end
 end
