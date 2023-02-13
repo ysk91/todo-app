@@ -8,9 +8,9 @@ Rails.application.routes.draw do
   }, skip: [:registrations, :sessions]
   devise_scope :user do
     get       'sign_up', to:            'users/registrations#new',      as: :new_user
-    post      'users', to:              'users/registrations#create'
+    post      'users', to:              'users/registrations#create',   as: :users
     get       'users/:id/edit', to:     'users/registrations#edit',     as: :edit_user
-    patch     'users/:id', to:          'users/registrations#update'
+    patch     'users/:id', to:          'users/registrations#update',   as: :user
 
     get       'login', to:              'users/sessions#new',           as: :login
     post      'login', to:              'users/sessions#create'

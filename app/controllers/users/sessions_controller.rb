@@ -4,21 +4,25 @@ class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
   def new
-    super
   end
 
   def create
-    super
+    @user = User.find_by(email: params[:session][:email])
+    if @user.valid_password?(params[:session][:password])
+      sign_in(:user, @user)
+      redirect_to categories_path, notice: "#{@user.name} としてログインしました"
+    else
+      render 'new', notice: "ログインに失敗しました"
+    end
   end
 
   def destroy
     super
   end
 
-  # protected
+  private
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
+  def sessions_params
+    params.require(:session).permit(:email, :password)
+  end
 end

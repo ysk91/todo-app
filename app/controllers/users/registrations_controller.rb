@@ -17,11 +17,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit
-    super
+    @user = User.find(params[:id])
   end
 
   def update
-    super
+    if @user.update(users_params)
+      redirect_to categories_path, notice: "ユーザー「#{@user.name}」を更新しました。"
+    else
+      render 'edit'
+    end
   end
 
   private
