@@ -21,6 +21,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update
+    @user = User.find(params[:id])
     if @user.update(users_params)
       redirect_to categories_path, notice: "ユーザー「#{@user.name}」を更新しました。"
     else

@@ -22,5 +22,9 @@ class User < ApplicationRecord
                                 # uniqueness: { scope: :group_id }
                                 # format: false
 
+  # 記事を参考にしたが効果無し
+  def remember_me
+    true
+  end
 
 end

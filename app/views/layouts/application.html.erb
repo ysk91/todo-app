@@ -24,8 +24,11 @@
       <%= yield %>
     </div>
     <div class="mt-5">
-      <%= debug(params) if Rails.env.development? %>
-      <%= debug(session) if Rails.env.development? %>
+      <% if Rails.env.development? %>
+        <%= debug(params) %>
+        <%= debug(session) %>
+        <%= debug(user_session) %>
+      <% end %>
     </div>
   </body>
 </html>
