@@ -8,8 +8,7 @@ class Users::SessionsController < Devise::SessionsController
   def create
     @user = User.find_by(email: params[:session][:email])
     if @user.valid_password?(params[:session][:password])
-      sign_in(@user)
-      @user.update!(remember_created_at: Time.zone.now) # ログインと同時にremember_created_atをtrueにしたが効果なし
+      sign_in(:user, @user)
       redirect_to categories_path, notice: "#{@user.name} としてログインしました"
     else
       render 'new', notice: "ログインに失敗しました"
@@ -20,9 +19,4 @@ class Users::SessionsController < Devise::SessionsController
     super
   end
 
-  private
-
-  def sessions_params
-    params.require(:session).permit(:email, :password)
-  end
 end

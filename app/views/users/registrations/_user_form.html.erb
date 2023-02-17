@@ -12,6 +12,15 @@
     <%= f.password_field :password, class: 'container-fluid' %>
   </div>
   <div class="my-3">
+    <%= f.label :password_confirmation, class: 'form-label fw-bold' %>
+    <%= f.password_field :password_confirmation, class: 'container-fluid' %>
+  </div>
+  <div class="my-3">
     <%= f.submit '登録', class: "btn btn-primary" %>
   </div>
+
+  <% if edit? %>
+    <p>ユーザー編集の場合、パスワードの入力は任意</p>
+  <% end %>
+
 <% end %>
