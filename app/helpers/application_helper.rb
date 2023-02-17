@@ -16,6 +16,10 @@ module ApplicationHelper
     controller.action_name == 'update'
   end
 
+  def new?
+    controller.action_name == 'new'
+  end
+
   def create?
     %w(new create copy).index(controller.action_name)
   end

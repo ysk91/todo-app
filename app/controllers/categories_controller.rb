@@ -1,4 +1,6 @@
 class CategoriesController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @categories = Category.includes(:todos).active.order(id: :DESC).page(params[:page]).per(10)
     @category = Category.new

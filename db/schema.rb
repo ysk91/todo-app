@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_04_223427) do
+ActiveRecord::Schema.define(version: 2023_02_08_232147) do
 
   create_table "categories", charset: "utf8mb4", force: :cascade do |t|
     t.string "title", null: false
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(version: 2023_01_04_223427) do
     t.date "done_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end

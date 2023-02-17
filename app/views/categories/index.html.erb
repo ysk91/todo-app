@@ -4,7 +4,9 @@
   <div class="border my-3 p-2">
     <p class="lead">ユーザーエリア(demo)</p>
     <div>
-      ・ユーザー名: sample<br>
+      ・ユーザー名: <%= current_user.name if signed_in? %><br>
+      ・<%= link_to('ユーザー編集', edit_user_path(current_user)) if user_signed_in? %><br>
+      ・<%= link_to('ログアウト', logout_path, method: :delete) if user_signed_in? %><br>
       ・残カテゴリ数: <%= @active_category_count %><br>
       ・達成カテゴリ数: <%= "#{@all_category_count - @active_category_count} / #{@all_category_count}" %><br>
     </div>

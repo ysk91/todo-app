@@ -1,0 +1,17 @@
+<%= form_with url: login_path, scope: :session do |f| %>
+  <div class="my-3">
+    <%= f.label :email, class: 'form-label fw-bold' %>
+    <%= f.text_field :email, class: 'container-fluid' %>
+  </div>
+  <div class="my-3">
+    <%= f.label :password, class: 'form-label fw-bold' %>
+    <%= f.password_field :password, class: 'container-fluid' %>
+  </div>
+  <div class="my-3">
+    <%= f.submit 'ログイン', class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<div class="my-5">
+  <p>新規ユーザーの場合: <%= link_to '新規登録', new_user_path %></p>
+</div>
